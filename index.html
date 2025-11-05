@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Fish ID</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0077B6;
+      --secondary: #0096C7;
+      --accent: #00B4D8;
+      --light: #CAF0F8;
+      --dark: #023E8A;
+      --text: #333333;
+      --white: #FFFFFF;
+      --shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      --transition: all 0.3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      line-height: 1.6;
+      background: linear-gradient(135deg, #f9fcff 0%, #e6f2ff 100%);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Loading Screen */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: white;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loading-content {
+      text-align: center;
+    }
+
+    .loading-fish {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: swim 2s infinite ease-in-out;
+    }
+
+    .loading-text {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .loading-dots {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background-color: white;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out both;
+    }
+
+    .dot:nth-child(1) { animation-delay: -0.32s; }
+    .dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes swim {
+      0%, 100% { transform: translateX(0) rotate(0); }
+      25% { transform: translateX(-10px) rotate(-5deg); }
+      75% { transform: translateX(10px) rotate(5deg); }
+    }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1); }
+    }
+
+    .hero-section {
+      position: relative;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: var(--white);
+      padding: 80px 20px;
+      text-align: center;
+      overflow: hidden;
+      border-radius: 0 0 40px 40px;
+    }
+
+    .hero-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%230096c7' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-section p {
+      font-size: 1.2rem;
+      margin-bottom: 15px;
+      opacity: 0.95;
+    }
+
+    .fish-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0px); }
+    }
+
+    /* Animasi untuk elemen saat scroll */
+    [data-animate] {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    [data-animate].visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .info-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin: 60px auto;
+      padding: 0 20px;
+      max-width: 1200px;
+    }
+
+    .card {
+      background: var(--white);
+      color: var(--dark);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      border-top: 5px solid var(--accent);
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-icon {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .card h2 {
+      margin-bottom: 15px;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    .card p, .card li {
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    ul {
+      text-align: left;
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "•";
+      color: var(--accent);
+      font-weight: bold;
+      display: inline-block;
+      width: 1em;
+      margin-left: -1em;
+    }
+
+    /* Galeri Mini */
+    .gallery-section {
+      padding: 60px 20px;
+      background: var(--white);
+      text-align: center;
+    }
+
+    .gallery-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-title {
+      font-size: 2.2rem;
+      color: var(--dark);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .gallery-item {
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-img {
+      width: 100%;
+      height: 200px;
+      background-color: var(--light);
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--dark);
+      font-size: 3rem;
+    }
+
+    .gallery-content {
+      padding: 20px;
+    }
+
+    .gallery-name {
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .gallery-desc {
+      color: var(--text);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .gallery-details {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--primary);
+    }
+
+    .gallery-details span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(0, 119, 182, 0.3);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px rgba(0, 119, 182, 0.4);
+    }
+
+    /* Quote Section */
+    .quote-section {
+      padding: 70px 20px;
+      background: linear-gradient(135deg, var(--light) 0%, #e1f5fe 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .quote-icon {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .quote-text {
+      font-size: 1.5rem;
+      font-style: italic;
+      line-height: 1.8;
+      color: var(--dark);
+      margin-bottom: 20px;
+      position: relative;
+      padding: 0 20px;
+    }
+
+    .quote-author {
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .quote-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300B4D8' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    /* Identity Section */
+    .identity {
+      background: linear-gradient(135deg, var(--light) 0%, #e1f5fe 100%);
+      padding: 60px 20px;
+      text-align: center;
+      color: var(--dark);
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px 40px 0 0;
+      margin-top: 40px;
+    }
+
+    .identity::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300B4D8' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .identity-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .identity h3 {
+      margin-bottom: 30px;
+      font-size: 2rem;
+      font-weight: 600;
+    }
+
+    .identity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .identity-item {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+
+    .identity-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .identity-item strong {
+      color: var(--primary);
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.1rem;
+    }
+
+    /* Timeline Section */
+    .timeline-section {
+      padding: 70px 20px;
+      background: var(--white);
+    }
+
+    .timeline-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .timeline-title {
+      font-size: 2.2rem;
+      color: var(--dark);
+      text-align: center;
+      margin-bottom: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--accent));
+      border-radius: 2px;
+    }
+
+    .timeline-item {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 30px;
+      position: relative;
+      margin: 20px 0;
+      width: 50%;
+    }
+
+    .timeline-item:nth-child(even) {
+      align-self: flex-end;
+      justify-content: flex-start;
+      padding-left: 30px;
+      padding-right: 0;
+      left: 50%;
+    }
+
+    .timeline-content {
+      background: var(--white);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      width: 100%;
+      max-width: 350px;
+      position: relative;
+      transition: var(--transition);
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      right: -10px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-left: 10px solid var(--white);
+    }
+
+    .timeline-item:nth-child(even) .timeline-content::after {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: -10px;
+      width: 0;
+      height: 0;
+      border-top: 10px solid transparent;
+      border-bottom: 10px solid transparent;
+      border-right: 10px solid var(--white);
+    }
+
+    .timeline-year {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 4px solid var(--white);
+      box-shadow: 0 0 0 3px var(--accent);
+      z-index: 1;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-dot {
+      left: calc(50% - 10px);
+    }
+
+    .timeline-item:nth-child(even) .timeline-dot {
+      left: calc(50% - 10px);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--dark) 100%);
+      color: var(--white);
+      padding: 50px 20px 30px;
+    }
+
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-about {
+      margin-bottom: 20px;
+    }
+
+    .footer-about h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-links h3,
+    .footer-social h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .footer-links h3::after,
+    .footer-social h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 50px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    .footer-links ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-links li {
+      margin-bottom: 10px;
+    }
+
+    .footer-links a {
+      color: var(--light);
+      text-decoration: none;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+      transform: translateX(5px);
+    }
+
+    .social-icons {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icons a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      color: var(--white);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+
+    .social-icons a:hover {
+      background: var(--accent);
+      transform: translateY(-5px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.9rem;
+      color: var(--light);
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      background: var(--accent);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .back-to-top.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      background: var(--light);
+      color: var(--primary);
+      transform: translateY(-5px);
+    }
+
+    /* Styling untuk bagian obat */
+    .supplies-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 40px 0;
+    }
+
+    .supply-item {
+      background: var(--white);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: var(--transition);
+    }
+
+    .supply-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .supply-header {
+      padding: 15px 20px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .supply-content {
+      padding: 20px;
+    }
+
+    .supply-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .supply-detail {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    .supply-detail i {
+      color: var(--primary);
+    }
+
+    .supply-img {
+      width: 100%;
+      height: 200px;
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #f8f9fa;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--primary);
+    }
+
+    .supply-maker {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
+      font-size: 0.9rem;
+      color: var(--primary);
+    }
+
+    .supply-maker i {
+      color: var(--accent);
+    }
+
+    .fishid-badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 5px;
+    }
+
+    /* Media Queries */
+    @media (max-width: 768px) {
+      .hero-section h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-section p {
+        font-size: 1rem;
+      }
+      
+      .card h2 {
+        font-size: 1.5rem;
+      }
+      
+      .identity-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .timeline::before {
+        left: 30px;
+      }
+      
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 0;
+      }
+      
+      .timeline-item:nth-child(even) {
+        left: 0;
+        padding-left: 70px;
+      }
+      
+      .timeline-item:nth-child(odd) .timeline-content::after,
+      .timeline-item:nth-child(even) .timeline-content::after {
+        display: none;
+      }
+      
+      .timeline-dot {
+        left: 20px !important;
+      }
+      
+      .back-to-top {
+        right: 20px;
+        bottom: 20px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+      }
+      
+      .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .supply-details {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-section {
+        padding: 60px 15px;
+      }
+      
+      .info-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin: 40px auto;
+      }
+      
+      .card {
+        padding: 20px;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .supplies-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loading-content">
+      <div class="loading-fish">
+        <i class="fas fa-fish"></i>
+      </div>
+      <div class="loading-text">🌊 Memuat koleksi Fish ID... 🐟</div>
+      <div class="loading-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="fish-icon">
+        <i class="fas fa-fish"></i>
+      </div>
+      <h1>Tentang Fish ID</h1>
+      <p><strong>Fish ID</strong> adalah website pribadi yang dibuat untuk menampilkan koleksi ikan saya, jenis pakan yang digunakan, dan dokumentasi perjalanan saya dalam dunia ikan hias serta ikan konsumsi.</p>
+      <p>Website ini resmi dibuat pada <strong>1 November 2025</strong> sebagai wadah informasi dan catatan digital tentang semua ikan yang saya pelihara.</p>
+    </div>
+  </section>
+
+  <div class="info-container">
+    <div class="card" data-animate>
+      <div class="card-icon">
+        <i class="fas fa-binoculars"></i>
+      </div>
+      <h2>🌊 Visi</h2>
+      <p>Menjadi media digital yang menginspirasi dan mengedukasi pecinta ikan dalam mengenal berbagai jenis ikan serta kebutahannya.</p>
+    </div>
+
+    <div class="card" data-animate>
+      <div class="card-icon">
+        <i class="fas fa-bullseye"></i>
+      </div>
+      <h2>💡 Misi</h2>
+      <ul>
+        <li>Mendokumentasikan seluruh koleksi ikan pribadi secara rapi dan informatif.</li>
+        <li>Memberikan informasi dasar tentang jenis ikan, ciri-ciri, dan pakan yang digunakan.</li>
+        <li>Menumbuhkan minat masyarakat terhadap dunia ikan dan budidaya perikanan.</li>
+        <li>Mengembangkan platform Fish ID agar dapat diakses dengan tampilan menarik dan responsif.</li>
+      </ul>
+    </div>
+
+    <div class="card" data-animate>
+      <div class="card-icon">
+        <i class="fas fa-flag-checkered"></i>
+      </div>
+      <h2>🎯 Tujuan</h2>
+      <ul>
+        <li>Menjadi arsip digital pribadi koleksi ikan saya.</li>
+        <li>Membagikan informasi tentang ikan yang saya pelihara.</li>
+        <li>Menjadi identitas dan portofolio sebagai pecinta ikan.</li>
+        <li>Mendata pakan yang digunakan untuk setiap jenis ikan.</li>
+        <li>Memberi inspirasi bagi orang lain untuk memelihara ikan.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Galeri Mini -->
+  <section class="gallery-section" data-animate>
+    <div class="gallery-container">
+      <h2 class="gallery-title"><i class="fas fa-images"></i> 🎏 Koleksi Ikan Saya</h2>
+      <p style="margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Cuplikan beberapa ikan favorit dari akuarium saya
+      </p>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <div class="gallery-img" style="background-color: #FFADAD;">
+            <i class="fas fa-fish"></i>
+          </div>
+          <div class="gallery-content">
+            <div class="gallery-name">Ikan lele</div>
+            <div class="gallery-desc">Ikan lele adalah salah satu jenis ikan air tawar yang banyak dibudidayakan di Indonesia.</div>
+            <div class="gallery-details">
+              <span><i class="fas fa-ruler"></i> 15 -20 cm</span>
+              <span><i class="fas fa-tint"></i> Air Tawar</span>
+              <span><i class="fas fa-temperature-low"></i> 26°C – 30°C</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="gallery-img" style="background-color: #FFD6A5;">
+            <i class="fas fa-fish"></i>
+          </div>
+          <div class="gallery-content">
+            <div class="gallery-name">Ikan Jaer</div>
+            <div class="gallery-desc">Ikan jaer  adalah ikan air tawar yang hidup di sungai, danau, rawa, dan waduk</div>
+            <div class="gallery-details">
+              <span><i class="fas fa-ruler"></i> 10 - 15 cm</span>
+              <span><i class="fas fa-tint"></i> Air Tawar</span>
+              <span><i class="fas fa-temperature-low"></i> 25°C – 30°C</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="gallery-img" style="background-color: #FDFFB6;">
+            <i class="fas fa-fish"></i>
+          </div>
+          <div class="gallery-content">
+            <div class="gallery-name">lobster</div>
+            <div class="gallery-desc">Lobster air tawar merupakan salah satu jenis hewan air yang banyak dibudidayakan karena memiliki nilai ekonomi tinggi dan daya tahan tubuh yang baik. Lobster ini hidup di air tawar seperti kolam, sungai, atau aquarium, dan dapat tumbuh dengan baik jika dirawat di lingkungan yang bersih dan stabil.</div>
+            <div class="gallery-details">
+              <span><i class="fas fa-ruler"></i> 3-6 cm</span>
+              <span><i class="fas fa-tint"></i> Air Tawar</span>
+              <span><i class="fas fa-temperature-low"></i>27°C – 30°C</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="gallery-item">
+          <div class="gallery-img" style="background-color: #CAFFBF;">
+            <i class="fas fa-fish"></i>
+          </div>
+          <div class="gallery-content">
+            <div class="gallery-name">chana limbata</div>
+            <div class="gallery-desc">Channa limbata, atau dikenal juga sebagai ikan gabus hias bergaris, merupakan salah satu jenis Channa (snakehead) yang populer di kalangan pecinta ikan predator air tawar. Ikan ini berasal dari perairan Asia Tenggara, termasuk Indonesia, dan hidup di sungai-sungai kecil, rawa, serta danau dengan air jernih dan tenang..</div>
+            <div class="gallery-details">
+              <span><i class="fas fa-ruler"></i> 10-20 cm</span>
+              <span><i class="fas fa-tint"></i> Air Tawar</span>
+              <span><i class="fas fa-temperature-low"></i> 25°C – 30°C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <a href="#" class="btn">Lihat Semua Koleksi <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- Koleksi Obat Ikan -->
+  <section class="gallery-section" data-animate>
+    <div class="gallery-container">
+      <h2 class="gallery-title"><i class="fas fa-pills"></i> 💊 Koleksi Obat Ikan</h2>
+      <p style="margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+        Obat-obatan yang saya gunakan untuk merawat kesehatan ikan
+      </p>
+      
+      <div class="supplies-container">
+        <div class="supply-item">
+          <div class="supply-img" style="background-color: #9BF6FF;">
+            <i class="fas fa-tint"></i>
+          </div>
+          <div class="supply-header">
+            <i class="fas fa-tint"></i>
+            <h3>Blucore Max Oil</h3>
+          </div>
+          <div class="supply-content">
+            <div class="supply-maker">
+              <i class="fas fa-industry"></i>
+              <span>Pembuat: bluecore Aquatic</span>
+            </div>
+            <p>Suplemen vitamin ikan berbasis Essential oil & Omega 3-6 Diformulasikan khusus untuk meningkatkan nafsu makan mempercepat pembentukan daging.</p>
+            <div class="supply-details">
+              <div class="supply-detail">
+                <i class="fas fa-bug"></i>
+                <span>Untuk: Perawatan Umum</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-flask"></i>
+                <span>DOSIS: UMUM</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-clock"></i>
+                <span>Durasi: -</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-star"></i>
+                <span>Rating: 5/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="supply-item">
+          <div class="supply-img" style="background-color: #A0C4FF;">
+            <i class="fas fa-prescription"></i>
+          </div>
+          <div class="supply-header">
+            <i class="fas fa-prescription"></i>
+            <h3>probiomax</h3>
+          </div>
+          <div class="supply-content">
+            <div class="supply-maker">
+              <i class="fas fa-industry"></i>
+              <span>Pembuat: bluecore Aquatic</span>
+            </div>
+            <p>BlueCore Probiomax adalah probiotik ikan penstabil air kolam dengan tambahan enzim aktif yang efektif sebagai bakteri starter.</p>
+            <div class="supply-details">
+              <div class="supply-detail">
+                <i class="fas fa-bug"></i>
+                <span>Untuk: Menjaga kualitas air kolam tetap jernih & stabil</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-flask"></i>
+                <span>-</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-clock"></i>
+                <span>Durasi: -</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-star"></i>
+                <span>Rating: 5/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="supply-item">
+          <div class="supply-img" style="background-color: #BDB2FF;">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <div class="supply-header">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Antibiotik Alami Ikan</h3>
+          </div>
+          <div class="supply-content">
+            <div class="supply-maker">
+              <i class="fas fa-industry"></i>
+              <span>Pembuat:bluecore Aquatic</span>
+            </div>
+            <p>Suplemen Ikan Serbaguna untuk Gurame, Lele, Nila, Patin, Channa, Cupang, Guppy, hingga Koi. Membantu menyembuhkan infeksi bakteri, virus, dan jamur. Perlindungan alami untuk ikan hias & konsumsi. Aman digunakan di aquarium maupun kolam tanpa merusak kualitas air.</p>
+            <div class="supply-details">
+              <div class="supply-detail">
+                <i class="fas fa-bug"></i>
+                <span>Untuk:Di Kolam</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-flask"></i>
+                <span>-</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-clock"></i>
+                <span>-</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-star"></i>
+                <span>Rating: 5/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="supply-item">
+          <div class="supply-img" style="background-color: #FFC6FF;">
+            <i class="fas fa-leaf"></i>
+          </div>
+          <div class="supply-header">
+            <i class="fas fa-leaf"></i>
+            <h3>Perasan Daun Ketapang <span class="fishid-badge">Fish ID</span></h3>
+          </div>
+          <div class="supply-content">
+            <div class="supply-maker">
+              <i class="fas fa-industry"></i>
+              <span>Pembuat: Fish ID</span>
+            </div>
+            <p>Ekstrak alami daun ketapang untuk menurunkan pH air, sebagai antiseptik alami, dan mengurangi stres pada ikan.</p>
+            <div class="supply-details">
+              <div class="supply-detail">
+                <i class="fas fa-bug"></i>
+                <span>Untuk: Stres, Antiseptik</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-flask"></i>
+                <span>Dosis: 10ml/50L</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-clock"></i>
+                <span>Durasi: Sesuai kebutuhan</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-star"></i>
+                <span>Rating: 5/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="supply-item">
+          <div class="supply-img" style="background-color: #FFFFFC;">
+            <i class="fas fa-stethoscope"></i>
+          </div>
+          <div class="supply-header">
+            <i class="fas fa-stethoscope"></i>
+            <h3>BlueMed</h3>
+          </div>
+          <div class="supply-content">
+            <div class="supply-maker">
+              <i class="fas fa-industry"></i>
+              <span>Pembuat: bluecore Aquatic</span>
+            </div>
+            <p>BlueMed adalah obat cair anti jamur & antibiotik ikan yang diformulasikan khusus untuk mengatasi berbagai penyakit ikan akibat bakteri, jamur, maupun parasit. Efektif membantu mengobati white spot (bintik putih), fin rot (busuk sirip), infeksi bakteri, dan jamur pada tubuh ikan.</p>
+            <div class="supply-details">
+              <div class="supply-detail">
+                <i class="fas fa-bug"></i>
+                <span>Untuk: Infeksi Jamur/bakteri</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-flask"></i>
+                <span>-</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-clock"></i>
+                <span>Durasi: -</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-star"></i>
+                <span>Rating: 5/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="supply-item">
+          <div class="supply-img" style="background-color: #E4FDE1;">
+            <i class="fas fa-biohazard"></i>
+          </div>
+          <div class="supply-header">
+            <i class="fas fa-biohazard"></i>
+            <h3>Maxi cure</h3>
+          </div>
+          <div class="supply-content">
+            <div class="supply-maker">
+              <i class="fas fa-industry"></i>
+              <span>Pembuat: bluecore Aquatic</span>
+            </div>
+            <p>Bluecore Paket Booster Alami merupakan kombinasi Aquabiotik (probiotik ikan) dan Maxicure (antiseptik & penyembuh luka ikan) yang diformulasikan untuk membantu perawatan luka serta mempercepat pemulihan ikan sakit parah.</p>
+            <div class="supply-details">
+              <div class="supply-detail">
+                <i class="fas fa-bug"></i>
+                <span>Untuk: Parasit Eksternal</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-flask"></i>
+                <span>-</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-clock"></i>
+                <span>Durasi: -</span>
+              </div>
+              <div class="supply-detail">
+                <i class="fas fa-star"></i>
+                <span>Rating: 5/5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <a href="#" class="btn">Lihat Semua Obat <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- Identity Section -->
+  <div class="identity" data-animate>
+    <div class="identity-content">
+      <h3>🧭 Identitas Fish ID</h3>
+      <div class="identity-grid">
+        <div class="identity-item">
+          <strong>Nama Proyek</strong>
+          Fish ID
+        </div>
+        <div class="identity-item">
+          <strong>Dibuat Pada</strong>
+          1 November 2025
+        </div>
+        <div class="identity-item">
+          <strong>Dibuat Oleh</strong>
+          [Fadz / Team Fish ID]
+        </div>
+        <div class="identity-item">
+          <strong>Fokus</strong>
+          Koleksi Ikan & Informasi Pakan
+        </div>
+        <div class="identity-item">
+          <strong>Moto</strong>
+          "Kenali, Rawat, dan Nikmati Keindahan Ikan"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quote Section -->
+  <section class="quote-section" data-animate>
+    <div class="quote-container">
+      <div class="quote-icon">
+        <i class="fas fa-quote-left"></i>
+      </div>
+      <p class="quote-text">"Setiap ikan punya karakter unik. Merawat mereka membuat saya lebih sabar dan menikmati ketenangan."</p>
+      <p class="quote-author">— [Fadz], Pembuat Fish ID</p>
+    </div>
+  </section>
+
+  <!-- Timeline Section -->
+  <section class="timeline-section" data-animate>
+    <div class="timeline-container">
+      <h2 class="timeline-title"><i class="fas fa-history"></i> Perjalanan Fish ID</h2>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year"><i class="fas fa-egg"></i> 2025</div>
+            <p>Website Fish ID dibuat sebagai platform dokumentasi koleksi ikan pribadi</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year"><i class="fas fa-fish"></i> 2026</div>
+            <p>Koleksi mencapai 30 jenis ikan dengan dokumentasi lengkap pakan dan perawatan</p>
+          </div>
+        </div>
+        
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-year"><i class="fas fa-water"></i> 2027</div>
+            <p>Rilis versi baru dengan galeri interaktif dan sistem identifikasi ikan otomatis</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-about">
+        <h3><i class="fas fa-fish"></i> Fish ID</h3>
+        <p>Platform dokumentasi koleksi ikan pribadi yang berisi informasi tentang berbagai jenis ikan, pakan, dan perawatannya.</p>
+      </div>
+      
+      <div class="footer-links">
+        <h3>Link Cepat</h3>
+        <ul>
+          <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+          <li><a href="#"><i class="fas fa-fish"></i> Koleksi</a></li>
+          <li><a href="#"><i class="fas fa-pills"></i> Obat</a></li>
+          <li><a href="#"><i class="fas fa-info-circle"></i> Tentang</a></li>
+          <li><a href="#"><i class="fas fa-envelope"></i> Kontak</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-social">
+        <h3>Ikuti Kami</h3>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.tiktok.com/@fishcraft11?_r=1&_t=ZS-918Nm7fjqth" target="_blank"><i class="fab fa-tiktok"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p style="margin-top: 20px; font-size: 0.9rem;">
+          <i class="fab fa-instagram"></i> IG: -<br>
+          <i class="fab fa-tiktok"></i> TikTok: <a href="https://www.tiktok.com/@fishcraft11?_r=1&_t=ZS-918Nm7fjqth" target="_blank" style="color: var(--light); text-decoration: none;">fishcraft11</a><br>
+          <i class="fab fa-youtube"></i> YouTube: -
+        </p>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>🌊 Fish ID © 2025 | Dibuat oleh [fish id]</p>
+    </div>
+  </footer>
+
+  <a href="#" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </a>
+
+  <script>
+    // Loading Screen
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.getElementById('loading-screen').style.opacity = '0';
+        document.getElementById('loading-screen').style.visibility = 'hidden';
+      }, 2000);
+    });
+
+    // Animasi saat scroll
+    const animateOnScroll = function() {
+      const elements = document.querySelectorAll('[data-animate]');
+      const windowHeight = window.innerHeight;
+      
+      elements.forEach(element => {
+        const position = element.getBoundingClientRect().top;
+        
+        if (position < windowHeight - 100) {
+          element.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', animateOnScroll);
+    window.addEventListener('load', animateOnScroll);
+
+    // Back to top button
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('active');
+      } else {
+        backToTopButton.classList.remove('active');
+      }
+    });
+    
+    backToTopButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  </script>
+
+</body>
+</html>
